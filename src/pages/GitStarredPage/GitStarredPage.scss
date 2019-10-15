@@ -1,0 +1,11 @@
+.page-git-starred {
+  padding: 24px 16px;
+
+  @media screen and (min-width: 768px) {
+    padding: 50px 16px;
+  }
+
+  h1 {
+    text-align: center;
+  }
+}

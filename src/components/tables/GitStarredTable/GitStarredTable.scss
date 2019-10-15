@@ -1,0 +1,16 @@
+.git-starred-table {
+  overflow-x: auto;
+
+  th.gs-stars,
+  th.gs-forks,
+  th.gs-language,
+  td.gs-stars,
+  td.gs-forks,
+  td.gs-language {
+    text-align: center;
+  }
+
+  table.gs-table {
+    max-height: 700px;
+  }
+}
