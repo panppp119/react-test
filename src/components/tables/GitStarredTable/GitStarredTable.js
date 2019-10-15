@@ -65,7 +65,6 @@ class GitStarredPage extends React.Component {
         pageStart={0}
         loadMore={loadMore}
         hasMore={!loading && hasMore}
-        threshold={50}
       >
         <Table
           dataSource={dataSource}

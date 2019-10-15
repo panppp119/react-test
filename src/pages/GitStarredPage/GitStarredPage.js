@@ -1,5 +1,6 @@
 import React from "react";
 import Moment from "moment";
+import { Button } from "antd";
 
 import CoreLayout from "components/layouts/CoreLayout";
 import GitStarredTable from "components/tables/GitStarredTable";
@@ -12,15 +13,21 @@ class GitStarredPage extends React.Component {
     page: 1,
     total: 0,
     hasMore: true,
-    loading: false
+    loading: false,
+    btnLoad: true
   };
 
   componentDidMount() {
     this.fetchGitMostStarred(this.state.page);
   }
 
+  handleClickBtnLoad = () => {
+    this.setState({ btnLoad: false });
+    this.loadMore();
+  };
+
   loadMore = () => {
-    var { source, total, page } = this.state;
+    var { source, total, page, btnLoad } = this.state;
 
     if (source.length > total) {
       console.warning("Infinite List loaded all");
@@ -32,6 +39,8 @@ class GitStarredPage extends React.Component {
     } else {
       this.fetchGitMostStarred(page + 1);
     }
+
+    btnLoad && this.setState({ btnLoad: false });
   };
 
   fetchGitMostStarred = page => {
@@ -73,7 +82,7 @@ class GitStarredPage extends React.Component {
   };
 
   render() {
-    const { source, total, loading, hasMore } = this.state;
+    const { source, total, loading, hasMore, btnLoad } = this.state;
 
     return (
       <CoreLayout>
@@ -89,8 +98,13 @@ class GitStarredPage extends React.Component {
             hasMore={hasMore}
             loading={loading}
             loadMore={this.loadMore}
-            handlePageChange={this.handlePageChange}
           />
+
+          {btnLoad && !loading && (
+            <Button onClick={this.handleClickBtnLoad} block>
+              Load More
+            </Button>
+          )}
         </div>
       </CoreLayout>
     );
